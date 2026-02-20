@@ -1,8 +1,8 @@
 [
     {
-        "name": "avivs mac",
+        "name": "ausd",
         "os": "Ubuntu",
-        "cpu": 3,
-        "ram": 4
+        "cpu": 2,
+        "ram": 1
     }
 ]
