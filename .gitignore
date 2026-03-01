@@ -13,14 +13,12 @@ __pycache__/
 .vscode/
 .idea/
 
-בכוונה שמתי סולמית בכל שורה כדי שנחליט ביחד אם צריך את זה או שנמחק אותם 
-# Local logs and temporary files
-#logs/*.log
-#*.tmp
-
 # Operating system files
 .DS_Store
 Thumbs.db
 
 # Project specific
-configs/instances.json
+# configs/instances.json 
+
+# Local logs and temporary files
+*.tmp

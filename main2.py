@@ -7,7 +7,6 @@ from pydantic import BaseModel, Field, ValidationError
 from typing import List, Literal
 from src.machine import Machine
 
-# 1. הגדרת מערכת הלוגים 📝
 os.makedirs('logs', exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
@@ -19,7 +18,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# 2. מודל אימות נתונים 🛡️
 class VMData(BaseModel):
     name: str
     os: Literal["Ubuntu", "CentOS"]
@@ -29,7 +27,6 @@ class VMData(BaseModel):
 def get_user_input() -> List[dict]:
     aws_formatted_machines = []
     
-    # שלב א: כמות מכונות (1-10) 🔢
     while True:
         try:
             val = input("🔢 Enter number of machines to create (1-10): ")
@@ -44,7 +41,6 @@ def get_user_input() -> List[dict]:
             logger.error(f"❌ {err}")
             print(f"❌ {err}")
 
-    # שלב ב: הגדרת כל מכונה בנפרד 🛠️
     for i in range(num):
         print(f"\n--- 🖥️  Configuring Machine #{i+1} ---")
         
@@ -82,7 +78,6 @@ def get_user_input() -> List[dict]:
                 logger.error(f"❌ {err}")
                 print("❌ RAM must be a whole number.")
 
-        # יצירת מבנה AWS ☁️
         aws_vm = {
             "InstanceId": f"i-{uuid.uuid4().hex[:8]}",
             "InstanceName": name,
@@ -100,18 +95,15 @@ if __name__ == "__main__":
     vms = get_user_input()
     
     if vms:
-        # שמירת JSON 💾
         os.makedirs('configs', exist_ok=True)
         with open('configs/instances.json', 'w') as f:
             json.dump(vms, f, indent=4)
         logger.info("💾 Saved configuration to configs/instances.json")
 
-        # הרצת פרוויז'נינג ⚙️
         print("\n--- 🚀 Starting Deployment Phase ---")
         for vm in vms:
             logger.info(f"⚙️  Provisioning {vm['InstanceName']}...")
             try:
-                # הרצת הסקריפט
                 subprocess.run(['bash', 'scripts/install_nginx.sh', vm['InstanceName']], check=True)
                 logger.info(f"✨ SUCCESS: {vm['InstanceName']} deployed successfully!")
             except Exception as e:
