@@ -18,7 +18,12 @@ __pycache__/
 Thumbs.db
 
 # Project specific
-# configs/instances.json 
+configs/instances.json
 
 # Local logs and temporary files
 *.tmp
+GITHUB-URL.txt 
+
+*.logs
+*.log 
+.vscode 
