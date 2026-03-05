@@ -25,5 +25,5 @@ configs/instances.json
 GITHUB-URL.txt 
 
 *.logs
-*.log 
-/.vscode 
+*.log
+.vscode/
