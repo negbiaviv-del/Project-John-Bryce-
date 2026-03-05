@@ -26,4 +26,4 @@ GITHUB-URL.txt
 
 *.logs
 *.log 
-.vscode 
+/.vscode 
